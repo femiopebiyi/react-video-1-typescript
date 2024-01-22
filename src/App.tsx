@@ -1,19 +1,31 @@
 import React from 'react';
 
+
 import './App.css';
 import { Person, Country } from './components/Person';
+import { Count } from './components/Count';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { Home } from './components/Home';
+import { Login } from './components/Login';
+import { Contact } from './components/Contact';
+import {Provider} from 'react-redux'
+import { store } from './store';
 
 function App() {
   return (
     <div className="App">
-       <Person
-    name = "Pedro"
-    email = "femi@femi.com"
-    age = {21}
-    isMarried = {false}
-    friends = {["jessica", 'francis', 'paul']}
-    country= {Country.Canada}
-    />
+      <Provider store={store}>
+      <Router>
+        <Link to= "/"> Home</Link>
+        <Link to= "/login"> Login</Link>
+        <Link to= "/contact"> Contact</Link>
+        <Routes>
+          <Route path='/' element= {<Home/>}/>
+          <Route path='/login' element= {<Login/>}/>
+          <Route path='/contact' element= {<Contact/>}/>
+        </Routes>
+      </Router>
+      </Provider>
     </div>
   );
 }
